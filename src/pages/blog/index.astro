@@ -1,34 +1,30 @@
 ---
 import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import BaseHead from '../../components/BaseHead.astro';
+import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import Header from '../../components/Header.astro';
 
 const posts = (await getCollection('blog')).sort(
 	(a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
-const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
 ---
 
-<!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title="Blog" description="All blog posts by Mahmoud Saeed" />
 		<style>
 			.hero {
 				text-align: center;
-				padding: 4em 1em 2em;
+				padding: 2em 1em;
 				background: linear-gradient(to bottom, rgba(var(--gray-light), 0.5), transparent);
 			}
 			.hero h1 {
-				font-size: 3.052em;
+				font-size: 2.441em;
 				margin-bottom: 0.5em;
 			}
 			.hero p {
-				font-size: 1.25em;
 				color: rgb(var(--gray-dark));
 				max-width: 600px;
 				margin: 0 auto;
@@ -36,18 +32,14 @@ const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
 			.posts-section {
 				padding: 2em 1em;
 			}
-			.section-title {
-				text-align: center;
-				margin-bottom: 2em;
-				font-size: 2.441em;
-			}
 			.posts-grid {
 				display: grid;
 				grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 				gap: 2rem;
 				list-style-type: none;
-				margin: 0;
+				margin: 0 auto;
 				padding: 0;
+				max-width: 1200px;
 			}
 			.post-card {
 				border-radius: 12px;
@@ -85,32 +77,7 @@ const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
 				margin: 0.5em 0 0 0;
 				color: rgb(var(--gray-dark));
 			}
-			.view-all {
-				text-align: center;
-				margin-top: 2em;
-			}
-			.view-all a {
-				display: inline-block;
-				padding: 0.75em 1.5em;
-				background: var(--accent);
-				color: white;
-				text-decoration: none;
-				border-radius: 6px;
-				transition: background 0.2s ease;
-			}
-			.view-all a:hover {
-				background: var(--accent-dark);
-			}
 			@media (max-width: 720px) {
-				.hero {
-					padding: 2em 1em;
-				}
-				.hero h1 {
-					font-size: 2.441em;
-				}
-				.hero p {
-					font-size: 1.125em;
-				}
 				.posts-grid {
 					grid-template-columns: 1fr;
 					gap: 1rem;
@@ -118,18 +85,18 @@ const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
 			}
 		</style>
 	</head>
+
 	<body>
 		<Header />
 		<main>
 			<section class="hero">
-				<h1>{SITE_TITLE}</h1>
-				<p>Software Engineer | Backend, Frontend & Architecture</p>
+				<h1>Blog</h1>
+				<p>Thoughts on software engineering, development practices, and technical insights.</p>
 			</section>
 			<section class="posts-section">
-				<h2 class="section-title">Recent Posts</h2>
 				<ul class="posts-grid">
 					{
-						recentPosts.map((post: any) => (
+						posts.map((post: any) => (
 							<li>
 								<a href={`/blog/${post.id}`} class="post-card">
 									{post.data.heroImage && (
@@ -147,11 +114,6 @@ const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
 						))
 					}
 				</ul>
-				{posts.length > 6 && (
-					<div class="view-all">
-						<a href="/blog">View All Posts</a>
-					</div>
-				)}
 			</section>
 		</main>
 		<Footer />

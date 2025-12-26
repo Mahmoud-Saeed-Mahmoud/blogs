@@ -1,0 +1,63 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+type Props = CollectionEntry<'pages'>['data'];
+
+const { title, description } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			.hero {
+				text-align: center;
+				padding: 2em 1em;
+				background: linear-gradient(to bottom, rgba(var(--gray-light), 0.5), transparent);
+			}
+			.hero h1 {
+				font-size: 2.441em;
+				margin-bottom: 0.5em;
+			}
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 2em 1em;
+				color: rgb(var(--gray-dark));
+			}
+			@media (max-width: 720px) {
+				.hero {
+					padding: 1em;
+				}
+				.hero h1 {
+					font-size: 1.953em;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="prose">
+					<div class="title">
+						<h1>{title}</h1>
+						<hr />
+					</div>
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
