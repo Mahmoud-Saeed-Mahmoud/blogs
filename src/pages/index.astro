@@ -1,13 +1,13 @@
 ---
-import { Image } from 'astro:assets';
-import { getCollection } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
-import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
+import { SITE_DESCRIPTION, SITE_TITLE } from "../consts";
 
-const posts = (await getCollection('blog')).sort(
+const posts = (await getCollection("blog")).sort(
 	(a: any, b: any) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
@@ -21,7 +21,11 @@ const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
 			.hero {
 				text-align: center;
 				padding: 4em 1em 2em;
-				background: linear-gradient(to bottom, rgba(var(--gray-light), 0.5), transparent);
+				background: linear-gradient(
+					to bottom,
+					rgba(var(--gray-light), 0.5),
+					transparent
+				);
 			}
 			.hero h1 {
 				font-size: 3.052em;
@@ -54,7 +58,9 @@ const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
 				overflow: hidden;
 				background: white;
 				box-shadow: 0 4px 12px rgba(var(--gray), 10%);
-				transition: transform 0.2s ease, box-shadow 0.2s ease;
+				transition:
+					transform 0.2s ease,
+					box-shadow 0.2s ease;
 				text-decoration: none;
 				color: inherit;
 				display: block;
@@ -123,7 +129,7 @@ const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
 		<main>
 			<section class="hero">
 				<h1>{SITE_TITLE}</h1>
-				<p>Software Engineer | Backend, Frontend & Architecture</p>
+				<p>Software Developer | Backend, Frontend & Architecture</p>
 			</section>
 			<section class="posts-section">
 				<h2 class="section-title">Recent Posts</h2>
@@ -133,25 +139,39 @@ const recentPosts = posts.slice(0, 6); // Show up to 6 recent posts
 							<li>
 								<a href={`/blog/${post.id}`} class="post-card">
 									{post.data.heroImage && (
-										<Image width={400} height={200} src={post.data.heroImage} alt="" class="post-image" />
+										<Image
+											width={400}
+											height={200}
+											src={post.data.heroImage}
+											alt=""
+											class="post-image"
+										/>
 									)}
 									<div class="post-content">
-										<h3 class="post-title">{post.data.title}</h3>
+										<h3 class="post-title">
+											{post.data.title}
+										</h3>
 										<p class="post-date">
-											<FormattedDate date={post.data.pubDate} />
+											<FormattedDate
+												date={post.data.pubDate}
+											/>
 										</p>
-										<p class="post-description">{post.data.description}</p>
+										<p class="post-description">
+											{post.data.description}
+										</p>
 									</div>
 								</a>
 							</li>
 						))
 					}
 				</ul>
-				{posts.length > 6 && (
-					<div class="view-all">
-						<a href="/blog">View All Posts</a>
-					</div>
-				)}
+				{
+					posts.length > 6 && (
+						<div class="view-all">
+							<a href="/blog">View All Posts</a>
+						</div>
+					)
+				}
 			</section>
 		</main>
 		<Footer />
