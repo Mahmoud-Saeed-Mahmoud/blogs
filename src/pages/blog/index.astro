@@ -100,7 +100,7 @@ const posts = (await getCollection('blog')).sort(
 							<li>
 								<a href={`/blog/${post.id}`} class="post-card">
 									{post.data.heroImage && (
-										<Image width={400} height={200} src={post.data.heroImage} alt="" class="post-image" />
+										<Image width={400} height={200} src={post.data.heroImage} alt={`Cover image for ${post.data.title}`} class="post-image" />
 									)}
 									<div class="post-content">
 										<h3 class="post-title">{post.data.title}</h3>
