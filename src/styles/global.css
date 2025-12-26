@@ -136,6 +136,77 @@ hr {
 	}
 }
 
+/* Custom scrollbar from portfolio */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: rgb(var(--gray-light));
+}
+
+::-webkit-scrollbar-thumb {
+	background: linear-gradient(135deg, var(--accent), #8b5cf6);
+	border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: linear-gradient(135deg, var(--accent-dark), #7c3aed);
+}
+
+/* Selection colors from portfolio */
+::selection {
+	background: rgba(35, 55, 255, 0.3);
+	color: var(--accent-dark);
+}
+
+::-moz-selection {
+	background: rgba(35, 55, 255, 0.3);
+	color: var(--accent-dark);
+}
+
+/* Focus styles */
+*:focus {
+	outline: none;
+}
+
+*:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+}
+
+/* Button hover effect */
+.btn-hover {
+	position: relative;
+	overflow: hidden;
+	transition: all 0.3s ease;
+}
+
+.btn-hover::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+	transition: left 0.5s;
+}
+
+.btn-hover:hover::before {
+	left: 100%;
+}
+
+/* Float animation */
+@keyframes float {
+	0%, 100% { transform: translateY(0px); }
+	50% { transform: translateY(-10px); }
+}
+
+.float-animation {
+	animation: float 6s ease-in-out infinite;
+}
+
 .sr-only {
 	border: 0;
 	padding: 0;
