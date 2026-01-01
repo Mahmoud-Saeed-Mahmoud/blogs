@@ -62,11 +62,16 @@ const posts = (await getCollection('blog')).sort(
 			}
 			.post-content {
 				padding: 1.5em;
+				min-height: 180px;
 			}
 			.post-title {
 				margin: 0 0 0.5rem 0;
 				color: rgb(var(--black));
 				line-height: 1.3;
+				display: -webkit-box;
+				-webkit-line-clamp: 2;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
 			}
 			.post-date {
 				margin: 0;
@@ -76,6 +81,10 @@ const posts = (await getCollection('blog')).sort(
 			.post-description {
 				margin: 0.5em 0 0 0;
 				color: rgb(var(--gray-dark));
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
 			}
 			@media (max-width: 720px) {
 				.posts-grid {
